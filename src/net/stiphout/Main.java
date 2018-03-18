@@ -11,18 +11,33 @@ class Main {
     ArrayList<Object> anArgList;
 
     anArgList = new ArrayList<>();
-    anArgList.add("kitten");
-    resArray.add("kien");
+    int[] a = {1,2,7,1};
+    anArgList.add(a);
+    resArray.add(true);
     argArray.add(anArgList);
 
     anArgList = new ArrayList<>();
-    anArgList.add("Chocolate");
-    resArray.add("Chole");
+    int[] b = {1,2,8,1};
+    anArgList.add(b);
+    resArray.add(false);
     argArray.add(anArgList);
 
     anArgList = new ArrayList<>();
-    anArgList.add("ThisThatTheOther");
-    resArray.add("ThThThth");
+    int[] c = {2,7,1};
+    anArgList.add(c);
+    resArray.add(true);
+    argArray.add(anArgList);
+
+    anArgList = new ArrayList<>();
+    int[] d = {2,7,4};
+    anArgList.add(d);
+    resArray.add(false);
+    argArray.add(anArgList);
+
+    anArgList = new ArrayList<>();
+    int[] e = {2,7,-2};
+    anArgList.add(e);
+    resArray.add(false);
     argArray.add(anArgList);
 
     Iterator<ArrayList> ait = argArray.iterator();
@@ -39,13 +54,15 @@ class Main {
   }
   private static Object worker(ArrayList args) {
     Iterator ai = args.iterator();
-    String str = (String)ai.next();
+    int[] nums = (int[])ai.next();
 
-    StringBuilder retVal = new StringBuilder();
-    for (int i=0;i<str.length();i+=(i%2==0)?1:3) {
-      retVal.append(str.charAt(i));
+    boolean has271 = false;
+    for (int i=0;i<nums.length-2;i++) {
+      if (nums[i+1]==nums[i]+5 && ( nums[i+2]>=nums[i]-3 && nums[i+2]<=nums[i]+1 ) ) {
+        has271=true;
+      }
     }
-    return retVal.toString();
+    return has271;
   }
 
 
