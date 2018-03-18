@@ -11,6 +11,8 @@ class Main {
     ArrayList<Object> resArray = new ArrayList<>();
     ArrayList<Object> anArgList;
 
+    // TODO Really need to figure out how PROPERLY do testing. This crap is kluged...
+
     // Custom code for passing an array of integers and getting back a boolean
     anArgList = new ArrayList<>();
     anArgList.add(new ArrayList<>(Arrays.asList(1,2,7,1)));
