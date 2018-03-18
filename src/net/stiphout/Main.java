@@ -1,60 +1,69 @@
 package net.stiphout;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 
 class Main {
   public static void main(String[] args) {
 
-    ArrayList<ArrayList> argArray = new ArrayList<>();
+    ArrayList<ArrayList> argArrays = new ArrayList<>();
     ArrayList<Object> resArray = new ArrayList<>();
     ArrayList<Object> anArgList;
 
+    // Custom code for passing an array of integers and getting back a boolean
     anArgList = new ArrayList<>();
-    int[] a = {1,2,7,1};
-    anArgList.add(a);
+    anArgList.add(new ArrayList<>(Arrays.asList(1,2,7,1)));
+    resArray.add(true);
+    argArrays.add(anArgList);
+
+    // Custom code for passing two strings and getting back a boolean
+    /*
+    anArgList = new ArrayList<>();
+    anArgList.add("abcabc");
+    anArgList.add("xyzxyz");
     resArray.add(true);
     argArray.add(anArgList);
+     */
 
-    anArgList = new ArrayList<>();
-    int[] b = {1,2,8,1};
-    anArgList.add(b);
-    resArray.add(false);
-    argArray.add(anArgList);
+    Iterator<ArrayList> argCallsIter = argArrays.iterator();
+    Iterator retValsIter = resArray.iterator();
 
-    anArgList = new ArrayList<>();
-    int[] c = {2,7,1};
-    anArgList.add(c);
-    resArray.add(true);
-    argArray.add(anArgList);
-
-    anArgList = new ArrayList<>();
-    int[] d = {2,7,4};
-    anArgList.add(d);
-    resArray.add(false);
-    argArray.add(anArgList);
-
-    anArgList = new ArrayList<>();
-    int[] e = {2,7,-2};
-    anArgList.add(e);
-    resArray.add(false);
-    argArray.add(anArgList);
-
-    Iterator<ArrayList> ait = argArray.iterator();
-    Iterator rit = resArray.iterator();
-
-    while (ait.hasNext() && rit.hasNext()) {
-      Object result = worker(ait.next());
-      if (result.equals(rit.next())) {
+    while (argCallsIter.hasNext() && retValsIter.hasNext()) {
+      ArrayList oneArgArray = argCallsIter.next();
+      Object expectedResult = retValsIter.next();
+      Object result = worker(oneArgArray );
+      if (result.equals(expectedResult )) {
+        // Passed the test!
         System.out.println("Check!");
       } else {
-        System.out.println("Uh-oh...");
+        // Something's wrong...
+        System.out.println("Uh-oh... Wanted " + expectedResult.toString() + " but got "
+            + result.toString() + " for input " + oneArgArray .toString());
       }
     }
   }
   private static Object worker(ArrayList args) {
-    Iterator ai = args.iterator();
-    int[] nums = (int[])ai.next();
+    Iterator argIter = args.iterator();
+
+    // Custom code for passing in an int[] in "nums"
+    ArrayList arg1 = (ArrayList)argIter.next();
+    Iterator arg1Iter = arg1.iterator();
+    int[] nums = new int[arg1.size()];
+    int arg1Counter=0;
+    while(arg1Iter.hasNext()) {
+      nums[arg1Counter++]=(int)arg1Iter.next();
+    }
+
+    // Custom code for passing in two Strings in "a" and "b"
+    /*
+    String a = (String)argIter.next();
+    String b = (String)argIter.next();
+     */
+
+    /*
+    The actual code starts below...
+     */
 
     // Warmup-2 > has271
     boolean has271 = false;
