@@ -1,22 +1,51 @@
 package net.stiphout;
 
-public class Main {
+import java.util.ArrayList;
+import java.util.Iterator;
+
+class Main {
   public static void main(String[] args) {
 
-    if (worker("abcxx")==1) { System.out.println("Check!"); } else { System.out.println("Fuck!"); }
-    if (worker("xxx")==2) { System.out.println("Check!"); } else { System.out.println("Fuck!"); }
-    if (worker("xxxx")==3) { System.out.println("Check!"); } else { System.out.println("Fuck!"); }
+    ArrayList<ArrayList> argArray = new ArrayList<>();
+    ArrayList<Object> resArray = new ArrayList<>();
+    ArrayList<Object> anArgList;
 
-  }
-  private static int worker(String str) {
-    int occurences = 0;
-    char[] ca = str.toCharArray();
-    for (int i = 0; i<ca.length-1;i++) {
-      if (ca[i]=='x' && ca[i+1]=='x') {
-        occurences++;
+    anArgList = new ArrayList<>();
+    anArgList.add("kitten");
+    resArray.add("kien");
+    argArray.add(anArgList);
+
+    anArgList = new ArrayList<>();
+    anArgList.add("Chocolate");
+    resArray.add("Chole");
+    argArray.add(anArgList);
+
+    anArgList = new ArrayList<>();
+    anArgList.add("ThisThatTheOther");
+    resArray.add("ThThThth");
+    argArray.add(anArgList);
+
+    Iterator<ArrayList> ait = argArray.iterator();
+    Iterator rit = resArray.iterator();
+
+    while (ait.hasNext() && rit.hasNext()) {
+      Object result = worker(ait.next());
+      if (result.equals(rit.next())) {
+        System.out.println("Check!");
+      } else {
+        System.out.println("Uh-oh...");
       }
     }
-    return  occurences;
+  }
+  private static Object worker(ArrayList args) {
+    Iterator ai = args.iterator();
+    String str = (String)ai.next();
+
+    StringBuilder retVal = new StringBuilder();
+    for (int i=0;i<str.length();i+=(i%2==0)?1:3) {
+      retVal.append(str.charAt(i));
+    }
+    return retVal.toString();
   }
 
 
